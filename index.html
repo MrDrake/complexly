@@ -4,14 +4,14 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Test</title>
+  <title>Complexly</title>
 
   <script src="blockly_compressed.js"></script>
   <script src="blocks_compressed.js"></script>
   <script src="javascript_compressed.js"></script>
   <script src="msg/js/en.js"></script>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="jquery-3.3.1.min.js"></script>
 
   <link href="style.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Niramit" rel="stylesheet" />
@@ -21,12 +21,15 @@
 <body>
   <div id="header">
     <h1>Complexly</h1>
+    <button onclick="runcode()">Run</button>
+    <button onclick="clearall()">New</button>
+    <button>Load</button>
+    <button>Save</button>
+    <button>Help</button>
   </div>
   <div id="flexContainer">
     <div id="blocklyDiv"></div>
-    <div id="console">
-      <p>Hello, World!</p>
-    </div>
+    <div id="console"></div>
   </div>
 
   <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
@@ -394,16 +397,32 @@
       grid: {spacing: 32, length: 33, colour: 'lightgrey', snap: true},
       zoom: {controls: true}
     });
+    
     var onresize = function(e) {
       Blockly.svgResize(workspace);
     }
     window.addEventListener('resize', onresize, false);
     onresize();
+
+    var clearall = function() {
+      workspace.clear();
+      $("#console").empty();
+    }
+
+    var runcode = function() {
+      $("#console").empty();
+      var code = Blockly.JavaScript.workspaceToCode(workspace);
+      try {
+        eval(code);
+      } catch (e) {
+        alert(e);
+      }
+    }
   </script>
 
   <script>
     $(function() {
-    
+      
     });
   </script>
 

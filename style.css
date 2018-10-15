@@ -8,7 +8,7 @@ html, body {
 }
 
 body {
-    background-color: #fff;
+    background-color: white;
     font-family: 'Niramit', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -17,12 +17,26 @@ body {
 }
 
 #header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     padding: 0 1em;
     height: 48px;
 }
 
 #header h1 {
-    margin: 0;
+    margin: 0 32px 0 0;
+}
+
+#header button {
+    font-family: 'Niramit', Calibri, 'Trebuchet MS', sans-serif;
+    height: 32px;
+    width: 80px;
+    border: 2px solid black;
+    border-radius: 8px;
+    font-size: 24px;
+    vertical-align: middle;
+    margin: 0 8px;
 }
 
 #flexContainer {
