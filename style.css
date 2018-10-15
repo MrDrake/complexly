@@ -9,13 +9,16 @@ html, body {
 
 body {
     background-color: #fff;
-    font-family: Niramit, Helvetica, sans-serif;
-    /*overflow: hidden;*/
+    font-family: 'Niramit', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.blocklyText, .blocklyHtmlInput, .blocklyTreeLabel {
+    font-family: 'Niramit', Calibri, 'Trebuchet MS', sans-serif !important;
 }
 
 #header {
     padding: 0 1em;
-    height: 60px;
+    height: 48px;
 }
 
 #header h1 {
@@ -25,16 +28,13 @@ body {
 #flexContainer {
     display: flex;
     align-items: stretch;
-    height: calc(100% - 60px);
+    height: calc(100% - 48px);
 }
 
 #console {
+    font-family: 'Inconsolata', 'Courier New', Courier, monospace;
     overflow: scroll;
     padding: 0 1em;
-}
-
-#console p {
-    margin: 0;
 }
 
 #console p::before {
@@ -45,10 +45,7 @@ body {
     #flexContainer {
         flex-direction: row;
     }
-    #blocklyDiv {
-        width: 50%;
-    }
-    #console {
+    #blocklyDiv, #console {
         width: 50%;
     }
 }
@@ -57,10 +54,7 @@ body {
     #flexContainer {
         flex-direction: column;
     }
-    #blocklyDiv {
-        height: 50%;
-    }
-    #console {
+    #blocklyDiv, #console {
         height: 50%;
     }
 }
