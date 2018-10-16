@@ -8,13 +8,23 @@
 
   <script src="blockly_compressed.js"></script>
   <script src="blocks_compressed.js"></script>
-  <script src="javascript_compressed.js"></script>
+  <script src="generators/javascript.js"></script>
+  <script src="generators/javascript/math.js"></script>
+  <script src="generators/javascript/colour.js"></script>
+  <script src="generators/javascript/lists.js"></script>
+  <script src="generators/javascript/logic.js"></script>
+  <script src="generators/javascript/loops.js"></script>
+  <script src="generators/javascript/procedures.js"></script>
+  <script src="generators/javascript/text.js"></script>
+  <script src="generators/javascript/variables_dynamic.js"></script>
+  <script src="generators/javascript/variables.js"></script>
   <script src="msg/js/en.js"></script>
 
   <script src="jquery-3.3.1.min.js"></script>
+  <script src="math.js"></script>
 
   <link href="style.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css?family=Niramit" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet" />
 </head>
 
@@ -185,18 +195,28 @@
       <block type="math_random_float"></block>
     </category>
     <category name="Text" colour="#5CA68D">
-      <block type="text_charAt">
-        <mutation at="true"></mutation>
-        <field name="WHERE">FROM_START</field>
-        <value name="VALUE">
-          <block type="variables_get">
-            <field name="VAR" id="{sj8;p!J`S{hGybYBXJr" variabletype="">text</field>
-          </block>
-        </value>
-      </block>
       <block type="text">
         <field name="TEXT"></field>
       </block>
+      <block type="text_print">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_prompt_ext">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_join">
+        <mutation items="2"></mutation>
+      </block>      
       <block type="text_append">
         <field name="VAR" id="|-jsjx_v3FSl#E!mL$wl" variabletype="">item</field>
         <value name="TEXT">
@@ -219,6 +239,15 @@
           </shadow>
         </value>
       </block>
+      <block type="text_charAt">
+        <mutation at="true"></mutation>
+        <field name="WHERE">FROM_START</field>
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR" id="{sj8;p!J`S{hGybYBXJr" variabletype="">text</field>
+          </block>
+        </value>
+      </block>
       <block type="text_indexOf">
         <field name="END">FIRST</field>
         <value name="VALUE">
@@ -231,9 +260,6 @@
             <field name="TEXT">abc</field>
           </shadow>
         </value>
-      </block>
-      <block type="text_join">
-        <mutation items="2"></mutation>
       </block>
       <block type="text_getSubstring">
         <mutation at1="true" at2="true"></mutation>
@@ -255,22 +281,6 @@
       </block>
       <block type="text_trim">
         <field name="MODE">BOTH</field>
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_print">
-        <value name="TEXT">
-          <shadow type="text">
-            <field name="TEXT">abc</field>
-          </shadow>
-        </value>
-      </block>
-      <block type="text_prompt_ext">
-        <mutation type="TEXT"></mutation>
-        <field name="TYPE">TEXT</field>
         <value name="TEXT">
           <shadow type="text">
             <field name="TEXT">abc</field>
@@ -415,7 +425,7 @@
       try {
         eval(code);
       } catch (e) {
-        alert(e);
+        $("#console").append('<p class="error">'+e+'</p>')
       }
     }
   </script>
