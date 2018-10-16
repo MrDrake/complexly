@@ -47,6 +47,7 @@ body {
 #console {
     font-family: 'Inconsolata', 'Courier New', Courier, monospace;
     overflow: scroll;
+    word-wrap: break-word;
     padding: 0 1em;
 }
 
