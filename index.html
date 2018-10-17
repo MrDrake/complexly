@@ -8,21 +8,12 @@
 
   <script src="blockly_compressed.js"></script>
   <script src="blocks_compressed.js"></script>
-  <script src="generators/javascript.js"></script>
-  <script src="generators/javascript/math.js"></script>
-  <script src="generators/javascript/colour.js"></script>
-  <script src="generators/javascript/lists.js"></script>
-  <script src="generators/javascript/logic.js"></script>
-  <script src="generators/javascript/loops.js"></script>
-  <script src="generators/javascript/procedures.js"></script>
-  <script src="generators/javascript/text.js"></script>
-  <script src="generators/javascript/variables_dynamic.js"></script>
-  <script src="generators/javascript/variables.js"></script>
+  <script src="javascript_compressed.js"></script>
   <script src="msg/js/en.js"></script>
 
   <script src="jquery-3.3.1.min.js"></script>
   <script src="FileSaver.js"></script>
-  <script src="math.js"></script>
+  <script src="math.min.js"></script>
 
   <link href="style.css" rel="stylesheet" />
 
@@ -38,7 +29,7 @@
     <button onclick="$('#input').click()">Load</button>
     <input type="file" id="input" accept="application/xml" onchange="loadcode()" style="display:none;" />
     <button onclick="savecode()">Save</button>
-    <button>Help</button>
+    <button onclick="showhelp()">Help</button>
   </div>
   <div id="flexContainer">
     <div id="blocklyDiv"></div>
@@ -130,10 +121,10 @@
       </block>
       <block type="math_number_property">
         <mutation divisor_input="false"></mutation>
-        <field name="PROPERTY">EVEN</field>
+        <field name="PROPERTY">PRIME</field>
         <value name="NUMBER_TO_CHECK">
           <shadow type="math_number">
-            <field name="NUM">0</field>
+            <field name="NUM">2</field>
           </shadow>
         </value>
       </block>
@@ -196,6 +187,58 @@
         </value>
       </block>
       <block type="math_random_float"></block>
+    </category>
+    <category name="Complex" colour="#5C68A6">
+      <block type="complex_i">
+      </block>
+      <block type="complex_literal">               
+      </block>
+      <block type="complex_constructor">               
+        <value name="REAL">
+          <shadow type="math_number">
+            <field name="NUM">-1</field>
+          </shadow>
+        </value>
+        <value name="IMAG">
+          <shadow type="math_number">
+            <field name="NUM">2</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="complex_euler">               
+        <value name="MOD">
+          <shadow type="math_number">
+            <field name="NUM">2</field>
+          </shadow>
+        </value>
+        <value name="ARG">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>   
+      <block type="complex_component">
+        <field name="FUNCTION">MOD</field>
+        <value name="TARGET">
+          <shadow type="math_number">
+            <field name="NUM">-1</field>
+          </shadow>
+        </value>
+      </block>         
+      <block type="complex_conjugate">
+      </block>
+      <block type="pi_fraction">               
+        <value name="REAL">
+          <shadow type="math_number">
+            <field name="NUM">2</field>
+          </shadow>
+        </value>
+        <value name="IMAG">
+          <shadow type="math_number">
+            <field name="NUM">3</field>
+          </shadow>
+        </value>
+      </block>      
     </category>
     <category name="Text" colour="#5CA68D">
       <block type="text">
@@ -407,7 +450,7 @@
   <script>
     var workspace = Blockly.inject('blocklyDiv', {
       toolbox: document.getElementById('toolbox'),
-      grid: {spacing: 32, length: 33, colour: 'lightgrey', snap: true},
+      grid: {spacing: 32, length: 33, colour: 'lightgrey', snap: true, media: 'media/'},
       zoom: {controls: true}
     });
     
@@ -427,6 +470,7 @@
       var code = Blockly.JavaScript.workspaceToCode(workspace);
       try {
         eval(code);
+        console.log("success");
       } catch (e) {
         $("#console").append('<p class="error">'+e+'</p>')
       }
@@ -454,13 +498,19 @@
       }
       if(file) {reader.readAsText(file);}
     }
-  </script>
 
-  <script>
-    $(function() {
-      
-    });
-  </script>
+    var showhelp = function() {
+      var msg = "Complexly is an extension of <a href='https://developers.google.com/blockly/'>Blockly</a> that handles complex numbers."
+      $("#console").append('<p class="help">'+msg+'</p>')
+      msg = "Uses <a href='http://mathjs.org/'>Math.js</a> and <a href='https://eligrey.com/blog/saving-generated-files-on-the-client-side/'>FileSaver.js</a>"
+      $("#console").append('<p class="help">'+msg+'</p>')
+      msg = "This software is unfinished and may contain bugs.  If you find any bugs or wish to request a feature, please do so <a href='https://github.com/MrDrake/complexly/issues'>here</a>."
+      $("#console").append('<p class="help">'+msg+'</p>')
+      msg = "Hacked together by <a href='https://mrdrake.com'>Mr. Drake</a>."
+      $("#console").append('<p class="help">'+msg+'</p>')
+    }
+</script>
+
 
 </body>
 </html>

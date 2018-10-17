@@ -55,8 +55,8 @@ body {
     content: "> ";
 }
 
-.error {
-    background-color: red;
+.help {
+    background-color: yellow;
 }
 
 @media all and (orientation: landscape) {

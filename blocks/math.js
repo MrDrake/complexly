@@ -191,8 +191,6 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
         "type": "field_dropdown",
         "name": "PROPERTY",
         "options": [
-          ["%{BKY_MATH_IS_EVEN}", "EVEN"],
-          ["%{BKY_MATH_IS_ODD}", "ODD"],
           ["%{BKY_MATH_IS_PRIME}", "PRIME"],
           ["%{BKY_MATH_IS_WHOLE}", "WHOLE"],
           ["%{BKY_MATH_IS_POSITIVE}", "POSITIVE"],

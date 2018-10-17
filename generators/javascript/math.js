@@ -40,7 +40,7 @@ Blockly.JavaScript['math_number'] = function(block) {
 Blockly.JavaScript['math_arithmetic'] = function(block) {
   // Basic arithmetic operators, and power.
   var operator = block.getFieldValue('OP');
-  var order = Blockly.JavaScript.ORDER_COMMA;
+  var order = Blockly.JavaScript.ORDER_MEMBER;
   var argument0 = Blockly.JavaScript.valueToCode(block, 'A', order) || '0';
   var argument1 = Blockly.JavaScript.valueToCode(block, 'B', order) || '0';
   var code;
@@ -68,30 +68,22 @@ Blockly.JavaScript['math_single'] = function(block) {
   // Math operators with single operand.
   var operator = block.getFieldValue('OP');
   var code;
-  var arg;
-  if (operator == 'NEG') {
-    // Negation is a special case given its different operator precedence.
-    arg = Blockly.JavaScript.valueToCode(block, 'NUM',
-        Blockly.JavaScript.ORDER_UNARY_NEGATION) || '0';
-    if (arg[0] == '-') {
-      // --3 is not legal in JS.
-      arg = ' ' + arg;
-    }
-    code = '-' + arg;
-    return [code, Blockly.JavaScript.ORDER_UNARY_NEGATION];
-  }
-  if (operator == 'SIN' || operator == 'COS' || operator == 'TAN') {
-    arg = Blockly.JavaScript.valueToCode(block, 'NUM',
-        Blockly.JavaScript.ORDER_DIVISION) || '0';
-  } else {
-    arg = Blockly.JavaScript.valueToCode(block, 'NUM',
-        Blockly.JavaScript.ORDER_NONE) || '0';
-  }
+  var arg = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_NONE) || '0';
   // First, handle cases which generate values that don't need parentheses
   // wrapping the code.
   switch (operator) {
     case 'ABS':
       code = 'math.abs(' + arg + ')';
+      break;
+  }
+  if (code) {
+    return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+  }
+  // Second, handle cases which generate values that may need parentheses
+  // wrapping the code.
+  switch (operator) {
+    case 'NEG':
+      code = 'math.unaryMinus(' + arg + ')';
       break;
     case 'ROOT':
       code = 'math.sqrt(' + arg + ')';
@@ -123,13 +115,6 @@ Blockly.JavaScript['math_single'] = function(block) {
     case 'TAN':
       code = 'math.tan(' + arg + ')';
       break;
-  }
-  if (code) {
-    return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
-  }
-  // Second, handle cases which generate values that may need parentheses
-  // wrapping the code.
-  switch (operator) {
     case 'LOG10':
       code = 'math.log10(' + arg + ')';
       break;
@@ -145,7 +130,7 @@ Blockly.JavaScript['math_single'] = function(block) {
     default:
       throw Error('Unknown math operator: ' + operator);
   }
-  return [code, Blockly.JavaScript.ORDER_DIVISION];
+  return [code, Blockly.JavaScript.ORDER_MEMBER];
 };
 
 Blockly.JavaScript['math_constant'] = function(block) {
@@ -153,8 +138,7 @@ Blockly.JavaScript['math_constant'] = function(block) {
   var CONSTANTS = {
     'PI': ['math.PI', Blockly.JavaScript.ORDER_MEMBER],
     'E': ['math.E', Blockly.JavaScript.ORDER_MEMBER],
-    'GOLDEN_RATIO':
-        ['math.phi', Blockly.JavaScript.ORDER_DIVISION],
+    'GOLDEN_RATIO': ['math.phi', Blockly.JavaScript.ORDER_MEMBER],
     'SQRT2': ['math.SQRT2', Blockly.JavaScript.ORDER_MEMBER],
     'SQRT1_2': ['math.SQRT1_2', Blockly.JavaScript.ORDER_MEMBER],
     'INFINITY': ['Infinity', Blockly.JavaScript.ORDER_ATOMIC]
@@ -166,32 +150,26 @@ Blockly.JavaScript['math_number_property'] = function(block) {
   // Check if a number is even, odd, prime, whole, positive, or negative
   // or if it is divisible by certain number. Returns true or false.
   var number_to_check = Blockly.JavaScript.valueToCode(block, 'NUMBER_TO_CHECK',
-      Blockly.JavaScript.ORDER_MODULUS) || '0';
+      Blockly.JavaScript.ORDER_ADDITION) || '0';
   var dropdown_property = block.getFieldValue('PROPERTY');
   var code;
   switch (dropdown_property) {
-    case 'EVEN':
-      code = number_to_check + ' % 2 == 0';
-      break;
-    case 'ODD':
-      code = number_to_check + ' % 2 == 1';
-      break;
     case 'WHOLE':
-      code = number_to_check + ' % 1 == 0';
+      code = 'math.isInteger(' + number_to_check + ')';
       break;
     case 'POSITIVE':
-      code = number_to_check + ' > 0';
+      code = 'math.isPositive(' + number_to_check + ')';
       break;
     case 'NEGATIVE':
-      code = number_to_check + ' < 0';
+      code = 'math.isNegative(' + number_to_check + ')';
       break;
     case 'PRIME':
       code = 'math.isPrime(' + number_to_check + ')';
       break;
     case 'DIVISIBLE_BY':
       var divisor = Blockly.JavaScript.valueToCode(block, 'DIVISOR',
-          Blockly.JavaScript.ORDER_MODULUS) || '0';
-      code = number_to_check + ' % ' + divisor + ' == 0';
+          Blockly.JavaScript.ORDER_ADDITION) || '0';
+      code = 'math.mod(' + number_to_check + ',' + divisor + ') == 0';
       break;
   }
   return [code, Blockly.JavaScript.ORDER_EQUALITY];
