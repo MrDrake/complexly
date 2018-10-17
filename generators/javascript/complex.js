@@ -1,6 +1,7 @@
 Blockly.JavaScript['complex_component'] = function(block) {
   var operator = block.getFieldValue('FUNCTION');
   var arg = Blockly.JavaScript.valueToCode(block, 'TARGET', Blockly.JavaScript.ORDER_ADDITION);
+  var code;
   switch (operator) {
     case 'REAL':
       code = 'math.re(' + arg + ')';
