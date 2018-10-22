@@ -75,6 +75,9 @@ Blockly.JavaScript['math_single'] = function(block) {
     case 'ABS':
       code = 'math.abs(' + arg + ')';
       break;
+    case 'SIGN':
+      code = 'math.sign(' + arg + ')';
+      break;
   }
   if (code) {
     return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
@@ -88,9 +91,24 @@ Blockly.JavaScript['math_single'] = function(block) {
     case 'ROOT':
       code = 'math.sqrt(' + arg + ')';
       break;
+    case 'SQUARE':
+      code = 'math.square(' + arg + ')';
+      break;
+    case 'CUBEROOT':
+      code = 'math.cbrt(' + arg + ')';
+      break;
+    case 'CUBE':
+      code = 'math.cube(' + arg + ')';
+      break;
     case 'LN':
       code = 'math.log(' + arg + ')';
       break;
+    case 'LOG10':
+      code = 'math.log10(' + arg + ')';
+      break;  
+    case 'LOG2':
+      code = 'math.log2(' + arg + ')';
+      break;  
     case 'EXP':
       code = 'math.exp(' + arg + ')';
       break;
@@ -114,9 +132,6 @@ Blockly.JavaScript['math_single'] = function(block) {
       break;
     case 'TAN':
       code = 'math.tan(' + arg + ')';
-      break;
-    case 'LOG10':
-      code = 'math.log10(' + arg + ')';
       break;
     case 'ASIN':
       code = 'math.asin(' + arg + ')';
@@ -200,6 +215,11 @@ Blockly.JavaScript['math_on_list'] = function(block) {
           Blockly.JavaScript.ORDER_NONE) || '[]';
       code = 'math.sum(' + list + ')';
       break;
+    case 'PRODUCT':
+      list = Blockly.JavaScript.valueToCode(block, 'LIST',
+          Blockly.JavaScript.ORDER_NONE) || '[]';
+      code = 'math.prod(' + list + ')';
+      break;
     case 'MIN':
       list = Blockly.JavaScript.valueToCode(block, 'LIST',
           Blockly.JavaScript.ORDER_NONE) || '[]';
@@ -210,7 +230,7 @@ Blockly.JavaScript['math_on_list'] = function(block) {
           Blockly.JavaScript.ORDER_NONE) || '[]';
       code = 'math.max(' + list + ')';
       break;
-    case 'AVERAGE':
+    case 'MEAN':
       // mathMean([null,null,1,3]) == 2.0.
       list = Blockly.JavaScript.valueToCode(block, 'LIST',
           Blockly.JavaScript.ORDER_NONE) || '[]';
@@ -230,11 +250,21 @@ Blockly.JavaScript['math_on_list'] = function(block) {
           Blockly.JavaScript.ORDER_NONE) || '[]';
       code = 'math.mode(' + list + ')';
       break;
+    case 'VARIANCE':
+      list = Blockly.JavaScript.valueToCode(block, 'LIST',
+          Blockly.JavaScript.ORDER_NONE) || '[]';
+      code = 'math.var(' + list + ')';
+      break;
     case 'STD_DEV':
       list = Blockly.JavaScript.valueToCode(block, 'LIST',
           Blockly.JavaScript.ORDER_NONE) || '[]';
       code = 'math.std(' + list + ')';
       break;
+    case 'MAD':
+      list = Blockly.JavaScript.valueToCode(block, 'LIST',
+          Blockly.JavaScript.ORDER_NONE) || '[]';
+      code = 'math.mad(' + list + ')';
+      break;    
     case 'RANDOM':
       list = Blockly.JavaScript.valueToCode(block, 'LIST',
           Blockly.JavaScript.ORDER_NONE) || '[]';

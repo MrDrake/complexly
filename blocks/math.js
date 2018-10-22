@@ -73,11 +73,11 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
         "type": "field_dropdown",
         "name": "OP",
         "options": [
-          ["%{BKY_MATH_ADDITION_SYMBOL}", "ADD"],
-          ["%{BKY_MATH_SUBTRACTION_SYMBOL}", "MINUS"],
-          ["%{BKY_MATH_MULTIPLICATION_SYMBOL}", "MULTIPLY"],
-          ["%{BKY_MATH_DIVISION_SYMBOL}", "DIVIDE"],
-          ["%{BKY_MATH_POWER_SYMBOL}", "POWER"]
+          ["+", "ADD"],
+          ["-", "MINUS"],
+          ["×", "MULTIPLY"],
+          ["÷", "DIVIDE"],
+          ["^", "POWER"]
         ]
       },
       {
@@ -102,10 +102,15 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
         "type": "field_dropdown",
         "name": "OP",
         "options": [
-          ["%{BKY_MATH_SINGLE_OP_ROOT}", 'ROOT'],
-          ["%{BKY_MATH_SINGLE_OP_ABSOLUTE}", 'ABS'],
           ['-', 'NEG'],
+          ["√", 'ROOT'],
+          ["square", 'SQUARE'],
+          ["cube root", 'CUBEROOT'],
+          ["cube", 'CUBE'],
+          ["absolute value", 'ABS'],
+          ["sign", 'SIGN'],
           ['ln', 'LN'],
+          ['log2', 'LOG2'],
           ['log10', 'LOG10'],
           ['e^', 'EXP'],
           ['10^', 'POW10']
@@ -266,12 +271,15 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
         "name": "OP",
         "options": [
           ["%{BKY_MATH_ONLIST_OPERATOR_SUM}", "SUM"],
+          ["%{BKY_MATH_ONLIST_OPERATOR_PRODUCT}", "PRODUCT"],
           ["%{BKY_MATH_ONLIST_OPERATOR_MIN}", "MIN"],
           ["%{BKY_MATH_ONLIST_OPERATOR_MAX}", "MAX"],
-          ["%{BKY_MATH_ONLIST_OPERATOR_AVERAGE}", "AVERAGE"],
+          ["%{BKY_MATH_ONLIST_OPERATOR_MEAN}", "MEAN"],
           ["%{BKY_MATH_ONLIST_OPERATOR_MEDIAN}", "MEDIAN"],
           ["%{BKY_MATH_ONLIST_OPERATOR_MODE}", "MODE"],
+          ["%{BKY_MATH_ONLIST_OPERATOR_VARIANCE}", "VARIANCE"],
           ["%{BKY_MATH_ONLIST_OPERATOR_STD_DEV}", "STD_DEV"],
+          ["%{BKY_MATH_ONLIST_OPERATOR_MAD}", "MAD"],
           ["%{BKY_MATH_ONLIST_OPERATOR_RANDOM}", "RANDOM"]
         ]
       },
@@ -390,9 +398,14 @@ Blockly.Constants.Math.TOOLTIPS_BY_OP = {
 
   // math_simple
   'ROOT': '%{BKY_MATH_SINGLE_TOOLTIP_ROOT}',
+  'CUBEROOT': '%{BKY_MATH_SINGLE_TOOLTIP_CUBEROOT}',
+  'SQUARE': '%{BKY_MATH_SINGLE_TOOLTIP_SQUARE}',
+  'CUBE': '%{BKY_MATH_SINGLE_TOOLTIP_CUBE}',
   'ABS': '%{BKY_MATH_SINGLE_TOOLTIP_ABS}',
+  'SIGN': '%{BKY_MATH_SINGLE_TOOLTIP_SIGN}',
   'NEG': '%{BKY_MATH_SINGLE_TOOLTIP_NEG}',
   'LN': '%{BKY_MATH_SINGLE_TOOLTIP_LN}',
+  'LOG2': '%{BKY_MATH_SINGLE_TOOLTIP_LOG2}',
   'LOG10': '%{BKY_MATH_SINGLE_TOOLTIP_LOG10}',
   'EXP': '%{BKY_MATH_SINGLE_TOOLTIP_EXP}',
   'POW10': '%{BKY_MATH_SINGLE_TOOLTIP_POW10}',
@@ -407,12 +420,15 @@ Blockly.Constants.Math.TOOLTIPS_BY_OP = {
 
   // math_on_lists
   'SUM': '%{BKY_MATH_ONLIST_TOOLTIP_SUM}',
+  'PRODUCT': '%{BKY_MATH_ONLIST_TOOLTIP_PRODUCT}',
   'MIN': '%{BKY_MATH_ONLIST_TOOLTIP_MIN}',
   'MAX': '%{BKY_MATH_ONLIST_TOOLTIP_MAX}',
-  'AVERAGE': '%{BKY_MATH_ONLIST_TOOLTIP_AVERAGE}',
+  'MEAN': '%{BKY_MATH_ONLIST_TOOLTIP_MEAN}',
   'MEDIAN': '%{BKY_MATH_ONLIST_TOOLTIP_MEDIAN}',
   'MODE': '%{BKY_MATH_ONLIST_TOOLTIP_MODE}',
+  'VARIANCE': '%{BKY_MATH_ONLIST_TOOLTIP_VARIANCE}',
   'STD_DEV': '%{BKY_MATH_ONLIST_TOOLTIP_STD_DEV}',
+  'MAD': '%{BKY_MATH_ONLIST_TOOLTIP_MAD}',
   'RANDOM': '%{BKY_MATH_ONLIST_TOOLTIP_RANDOM}'
 };
 

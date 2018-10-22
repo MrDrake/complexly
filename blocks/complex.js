@@ -44,7 +44,7 @@ Blockly.Blocks['complex_literal'] = {
         .appendField(new Blockly.FieldNumber(2), "IMAG")
         .appendField("i");
     this.setInputsInline(true);
-    this.setOutput(true, null);
+    this.setOutput(true, "Number");
     this.setColour(65);
  this.setTooltip("Complex literal");
  this.setHelpUrl("");
@@ -61,7 +61,7 @@ Blockly.Blocks['complex_constructor'] = {
     this.appendDummyInput()
         .appendField("i");
     this.setInputsInline(true);
-    this.setOutput(true, null);
+    this.setOutput(true, "Number");
     this.setColour(65);
  this.setTooltip("Complex literal");
  this.setHelpUrl("");
@@ -76,7 +76,7 @@ Blockly.Blocks['complex_euler'] = {
         .setCheck("Number")
         .appendField("e^i");;
     this.setInputsInline(true);
-    this.setOutput(true, null);
+    this.setOutput(true, "Number");
     this.setColour(65);
  this.setTooltip("Complex literal");
  this.setHelpUrl("");
@@ -91,7 +91,7 @@ Blockly.Blocks['pi_fraction'] = {
         .setCheck("Number")
         .appendField("π /");
     this.setInputsInline(true);
-    this.setOutput(true, null);
+    this.setOutput(true, "Number");
     this.setColour(65);
  this.setTooltip("π fraction");
  this.setHelpUrl("");

@@ -43,22 +43,24 @@ Blockly.JavaScript['text_join'] = function(block) {
     case 1:
       var element = Blockly.JavaScript.valueToCode(block, 'ADD0',
           Blockly.JavaScript.ORDER_NONE) || '\'\'';
-      var code = 'String(' + element + ')';
+      var code = 'math.print("$0",[' + element + '],12)';
       return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
     case 2:
       var element0 = Blockly.JavaScript.valueToCode(block, 'ADD0',
           Blockly.JavaScript.ORDER_NONE) || '\'\'';
       var element1 = Blockly.JavaScript.valueToCode(block, 'ADD1',
           Blockly.JavaScript.ORDER_NONE) || '\'\'';
-      var code = 'String(' + element0 + ') + String(' + element1 + ')';
+      var code = 'math.print("$0$1",[' + element0 + ',' + element1 + '],12)';
       return [code, Blockly.JavaScript.ORDER_ADDITION];
     default:
       var elements = new Array(block.itemCount_);
+      var printstr = '';
       for (var i = 0; i < block.itemCount_; i++) {
         elements[i] = Blockly.JavaScript.valueToCode(block, 'ADD' + i,
             Blockly.JavaScript.ORDER_COMMA) || '\'\'';
+        printstr += '$'+i
       }
-      var code = '[' + elements.join(',') + '].join(\'\')';
+      var code = 'math.print("' + printstr + '",[' + elements.join(',') + '],12)';
       return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
   }
 };
@@ -280,7 +282,7 @@ Blockly.JavaScript['text_print'] = function(block) {
   // Print statement.
   var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
       Blockly.JavaScript.ORDER_NONE) || '\'\'';
-  return '$("#console").append("<p>"+'+msg+'+"</p>");\n';
+  return '$("#console").append("<p>"+math.print("$0",['+msg+'],12)+"</p>");\n';
 };
 
 Blockly.JavaScript['text_prompt_ext'] = function(block) {
