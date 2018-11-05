@@ -57,3 +57,9 @@ Blockly.JavaScript['pi_fraction'] = function(block) {
   var code = 'math.divide(math.multiply(' + value_num + ',math.pi),' + value_den + ')';
   return [code, Blockly.JavaScript.ORDER_MEMBER];
 };
+
+Blockly.JavaScript['complex_plot'] = function(block) {
+  var value_point = Blockly.JavaScript.valueToCode(block, 'POINT', Blockly.JavaScript.ORDER_ADDITION);
+  var code = 'plot(math.re(' + value_point + '),math.im(' + value_point + '));\n';
+  return code;
+};

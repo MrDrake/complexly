@@ -97,3 +97,16 @@ Blockly.Blocks['pi_fraction'] = {
  this.setHelpUrl("");
   }
 };
+
+Blockly.Blocks['complex_plot'] = {
+    init: function() {
+      this.appendValueInput("POINT")
+          .setCheck("Number")
+          .appendField("Plot");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(65);
+   this.setTooltip("Plot complex number on the Argand Diagram");
+   this.setHelpUrl("");
+    }
+  };
